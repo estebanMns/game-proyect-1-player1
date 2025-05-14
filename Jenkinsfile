@@ -6,12 +6,7 @@ pipeline {
     VERCEL_TOKEN = credentials('github-creds') // Token (si se usa despliegue, si no, puedes quitarlo)
   }
 
-  stages {
-    stage('Declarative: Checkout SCM') {
-      steps {
-        checkout scm
-      }
-    }
+  
 
     stage('Tool Install') {
       steps {
