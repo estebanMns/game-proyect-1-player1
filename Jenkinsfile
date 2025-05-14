@@ -27,7 +27,7 @@ pipeline {
 
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/estebanMns/node-project.git', branch: 'main'
+        git url: 'https://github.com/estebanMns/game-proyect-1-player1.git', branch: 'main'
       }
     }
 
