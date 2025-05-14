@@ -3,10 +3,15 @@ pipeline {
 
   environment {
     CI = "false" // Desactiva que React trate los warnings como errores
-    VERCEL_TOKEN = credentials('github-creds') // Token (si se usa despliegue, si no, puedes quitarlo)
+    VERCEL_TOKEN = credentials('github-creds') 
   }
 
-  
+  stages {
+    stage('Declarative: Checkout SCM') {
+      steps {
+        checkout scm
+      }
+    }
 
     stage('Tool Install') {
       steps {
