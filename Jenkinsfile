@@ -33,7 +33,7 @@ pipeline {
 
     stage('Install dependencies') {
       steps {
-         sh 'bash -xe -c npm install --legacy-peer-deps'
+         sh -xe 'npm install --legacy-peer-deps'
 
       }
     }
