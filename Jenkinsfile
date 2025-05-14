@@ -33,7 +33,7 @@ pipeline {
 
     stage('Install dependencies') {
       steps {
-        bat 'npm install --legacy-peer-deps'
+        sh 'npm install --legacy-peer-deps'
       }
     }
 
