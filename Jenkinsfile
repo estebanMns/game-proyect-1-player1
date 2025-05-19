@@ -32,9 +32,6 @@ pipeline {
     }
 
     stage('Instalar dependencias (Node.js requerido)') {
-            agent { label 'Esteban' } // Asegúrate de que este agente tenga la herramienta NodeJS configurada
-            tools {
-                nodejs 'Node_20'
             }
             steps {
                 sh 'npm install --legacy-peer-deps'
