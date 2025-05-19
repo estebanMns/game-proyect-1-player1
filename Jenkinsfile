@@ -31,11 +31,11 @@ pipeline {
       }
     }
 
-    stage('Instalar dependencias (Node.js requerido)') {
-            }
-            steps {
-                sh 'npm install --legacy-peer-deps'
-            }
+    stage('Install dependencies') {
+      steps {
+        Sh 'npm install --legacy-peer-deps'
+      }
+    }
 
     stage('Run tests') {
       steps {
