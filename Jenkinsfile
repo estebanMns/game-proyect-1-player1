@@ -33,19 +33,19 @@ pipeline {
 
     stage('Install dependencies') {
       steps {
-        sh 'npm install --legacy-peer-deps'
+        bat 'npm install --legacy-peer-deps'
       }
     }
 
     stage('Run tests') {
       steps {
-        sh 'npm test -- --watchAll=false'
+        bat 'npm test -- --watchAll=false'
       }
     }
 
     stage('Build app') {
       steps {
-        sh 'npm run build'
+        bat 'npm run build'
       }
     }
   }
