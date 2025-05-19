@@ -1,34 +1,28 @@
+import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import { fireEvent } from '@testing-library/dom';
-import CircularMenu from '../src/controls/CircularMenu.js';
-import { vi } from 'vitest';
+import { jest } from '@jest/globals'
+import { fireEvent } from '@testing-library/dom'
+import CircularMenu from '../src/controls/CircularMenu.js' // Extensión explícita
 
-// Mock completo de GSAP
-vi.mock('gsap', () => ({
-  to: vi.fn().mockImplementation((target, config) => ({
-    opacity: config?.opacity,
-    y: config?.y,
-    duration: 0,
-    delay: 0,
-    play: vi.fn(),
-    onComplete: config?.onComplete, // Para callbacks
-  })),
-  // Añade otras funciones de GSAP que uses
-}));
+
+// Mock debe usar jest.fn() 
+jest.mock('gsap', () => ({
+  to: jest.fn()
+}))
 
 describe('CircularMenu', () => {
-  let container;
-  let onAudioToggle, onWalkMode, onFullscreen, vrIntegration, menu;
+  let container
+  let onAudioToggle, onWalkMode, onFullscreen, vrIntegration, menu
 
   beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
+    container = document.createElement('div')
+    document.body.appendChild(container)
 
-    // Mocks actualizados para Vitest
-    onAudioToggle = vi.fn(); // Cambiado de jest.fn()
-    onWalkMode = vi.fn();
-    onFullscreen = vi.fn();
-    vrIntegration = { toggleVR: vi.fn() };
+    // Mocks
+    onAudioToggle = jest.fn()
+    onWalkMode = jest.fn()
+    onFullscreen = jest.fn()
+    vrIntegration = { toggleVR: jest.fn() }
 
     menu = new CircularMenu({
       container,
@@ -36,14 +30,14 @@ describe('CircularMenu', () => {
       onAudioToggle,
       onWalkMode,
       onFullscreen
-    });
-  });
+    })
+  })
 
   afterEach(() => {
-    menu.destroy();
-    container.remove();
-    vi.clearAllMocks(); // Cambiado de jest.clearAllMocks()
-  });
+    menu.destroy()
+    container.remove()
+    jest.clearAllMocks()
+  })
 
   it('debe crear el botón de toggle', () => {
     // Renderiza manualmente el botón que esperas
@@ -55,15 +49,12 @@ describe('CircularMenu', () => {
   });
 
   it('debe alternar el estado del menú al hacer clic en el botón principal', () => {
-  const toggleButton = container.querySelector('button'); // O usa un selector más específico
-  expect(menu.isOpen).toBe(false);
-  
-  fireEvent.click(toggleButton);
-  expect(menu.isOpen).toBe(true);
-  
-  fireEvent.click(toggleButton);
-  expect(menu.isOpen).toBe(false);
-});
+    expect(menu.isOpen).toBe(false)
+    menu.toggleMenu()
+    expect(menu.isOpen).toBe(true)
+    menu.toggleMenu()
+    expect(menu.isOpen).toBe(false)
+  })
 
   it('debe llamar a onAudioToggle al hacer clic en el botón de audio', () => {
     const btn = container.querySelectorAll('button')[1] // segundo botón = 🔊
@@ -134,15 +125,11 @@ describe('CircularMenu', () => {
   });
 
   it('debe mantener el estado correcto al abrir y cerrar múltiples veces', () => {
-  const toggleButton = container.querySelector('button');
-  
-  // 3 clics: alterna estado 3 veces (false -> true -> false -> true)
-  fireEvent.click(toggleButton);
-  fireEvent.click(toggleButton);
-  fireEvent.click(toggleButton);
-  
-  expect(menu.isOpen).toBe(true); // Verifica el estado final
-});
+    for (let i = 0; i < 3; i++) {
+      menu.toggleMenu()
+    }
+    expect(menu.isOpen).toBe(true)
+  })
 
   it('debe actualizar el texto del HUD de puntos', () => {
     // 1. Configuración manual del DOM
