@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Este repositorio contiene el backend del proyecto interactivo en primera persona, desarrollado como una API RESTful utilizando **Node.js**, **Express** y **MongoDB**, y estructurado bajo el patrón arquitectónico **MVC (Modelo - Vista - Controlador)**.",
   "dependencies": {
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
@@ -16,5 +16,16 @@
     "express": "^5.1.0",
     "mongoose": "^8.13.2",
     "node-fetch": "^3.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estebanMns/game-proyect-1-player1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/estebanMns/game-proyect-1-player1/issues"
+  },
+  "homepage": "https://github.com/estebanMns/game-proyect-1-player1#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
